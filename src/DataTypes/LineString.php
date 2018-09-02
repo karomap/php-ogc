@@ -2,8 +2,8 @@
 
 namespace Karomap\PHPOGC\DataTypes;
 
-use Karomap\PHPOGC\OGCObject;
 use Karomap\PHPOGC\Exceptions\GeoSpatialException;
+use Karomap\PHPOGC\OGCObject;
 
 /**
  * Class LineString

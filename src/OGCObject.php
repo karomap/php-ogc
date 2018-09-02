@@ -2,8 +2,8 @@
 
 namespace Karomap\PHPOGC;
 
-use CrEOF\Geo\WKT\Parser as WKTParser;
 use CrEOF\Geo\WKB\Parser as WKBParser;
+use CrEOF\Geo\WKT\Parser as WKTParser;
 
 abstract class OGCObject
 {
