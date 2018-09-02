@@ -1,6 +1,8 @@
 # Rationale
 
-This package aims to implement the Open Geo Consortium proposed standard for geo-spatial objects.  
+This is a fork from [elevenlab/php-ogc](https://github.com/eleven-lab/php-ogc) with some modifications.
+
+This package aims to implement the Open Geo Consortium proposed standard for geo-spatial objects.
 
 # Installation
 
@@ -9,7 +11,7 @@ This package aims to implement the Open Geo Consortium proposed standard for geo
 Execute in the project root folder:
 
 ```bash
-$ composer require elevenlab/php-ogc
+$ composer require karomap/php-ogc
 ```
 
 ## Manually
@@ -41,8 +43,8 @@ $p7 = Point::fromWKT("POINT(0 0)");
 ```php
 <?php
 
-$l1 = new LineString([new Point(1, 2), new Point(3, 4), new Point(5, 6)]); 
-$l2 = new LineString([new Point(1, 2), new Point(3, 4), new Point(5, 6), new Point(1, 2)]); 
+$l1 = new LineString([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
+$l2 = new LineString([new Point(1, 2), new Point(3, 4), new Point(5, 6), new Point(1, 2)]);
 $l3 = LineString::fromArray([[1,2], [2,3], [3,4]]);
 $l4 = LineString::fromString('1 2, 2 3, 3 4, 4 5');
 $l5 = LineString::fromString('1 2@ 2 3@ 3 4@ 4 5', '@');
@@ -107,7 +109,7 @@ $gc = new GeometryCollection([
     MultiPolygon::fromString("1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6|1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6|1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6"),
     MultiLineString::fromArray([[[1,2], [2,3], [3,4]],[[5,6], [7,8], [9,10]]]),
     LineString::fromWKT("LINESTRING(0 0,1 1,1 2)"),
-    new Point(1.234, 2.345) 
+    new Point(1.234, 2.345)
 ]);
 
 ```

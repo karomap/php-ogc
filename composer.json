@@ -1,7 +1,7 @@
 {
   "name": "karomap/php-ogc",
   "description": "GeoSpatial objects (Open Geo Consortium compliant)",
-  "license": "GNU GPL v3.0",
+  "license": "GPL-3.0-only",
   "keywords": ["geo", "geospatial", "ogc"],
   "authors": [
     {
