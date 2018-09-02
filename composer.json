@@ -1,5 +1,5 @@
 {
-  "name": "elevenlab/php-ogc",
+  "name": "karomap/php-ogc",
   "description": "GeoSpatial objects (Open Geo Consortium compliant)",
   "license": "GNU GPL v3.0",
   "keywords": ["geo", "geospatial", "ogc"],
@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ElevenLab\\PHPOGC\\": "src/"
+      "Karomap\\PHPOGC\\": "src/"
     }
   }
 }

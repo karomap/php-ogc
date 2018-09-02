@@ -1,9 +1,9 @@
 <?php
 
-namespace ElevenLab\PHPOGC\DataTypes;
+namespace Karomap\PHPOGC\DataTypes;
 
-use ElevenLab\PHPOGC\OGCObject;
-use ElevenLab\PHPOGC\Exceptions\GeoSpatialException;
+use Karomap\PHPOGC\OGCObject;
+use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 
 /**
  * Class GeometryCollection

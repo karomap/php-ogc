@@ -1,6 +1,6 @@
 <?php
 
-namespace ElevenLab\PHPOGC\DataTypes;
+namespace Karomap\PHPOGC\DataTypes;
 
 class MultiPoint extends LineString
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ElevenLab\PHPOGC;
+namespace Karomap\PHPOGC;
 
 use CrEOF\Geo\WKT\Parser as WKTParser;
 use CrEOF\Geo\WKB\Parser as WKBParser;
@@ -16,7 +16,7 @@ abstract class OGCObject
         'MULTIPOLYGON' => 'MultiPolygon',
         'GEOMETRYCOLLECTION' => 'GeometryCollection',
     ];
-    
+
     private $wkt = null;
     private $wkb = null;
 
@@ -40,7 +40,7 @@ abstract class OGCObject
      */
     private static function buildClassName($type)
     {
-        return 'ElevenLab\PHPOGC\DataTypes\\' . self::$types_map[$type];
+        return 'Karomap\PHPOGC\DataTypes\\' . self::$types_map[$type];
     }
 
     /**
@@ -50,6 +50,18 @@ abstract class OGCObject
     public static function buildOGCObject($parsed)
     {
         $typeClass = self::buildClassName($parsed['type']);
+
+        if ($parsed['type'] == 'GEOMETRYCOLLECTION') {
+            $ogcObjects = [];
+            array_walk($parsed['value'], function($ogcArray) use(&$ogcObjects) {
+                if (array_key_exists('type', $ogcArray)) {
+                    $ogcClass = self::buildClassName($ogcArray['type']);
+                    $ogcObjects[] = $ogcClass::fromArray($ogcArray['value']);
+                }
+            });
+            return new $typeClass($ogcObjects);
+        }
+
         return $typeClass::fromArray($parsed['value']);
     }
 
