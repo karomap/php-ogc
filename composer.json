@@ -2,7 +2,11 @@
   "name": "karomap/php-ogc",
   "description": "GeoSpatial objects (Open Geo Consortium compliant)",
   "license": "GPL-3.0-only",
-  "keywords": ["geo", "geospatial", "ogc"],
+  "keywords": [
+    "geo",
+    "geospatial",
+    "ogc"
+  ],
   "authors": [
     {
       "name": "Lorenzo Giustozzi",
@@ -16,11 +20,12 @@
     "creof/wkt-parser": "^2.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.0.*"
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
     "psr-4": {
       "Karomap\\PHPOGC\\": "src/"
     }
-  }
+  },
+  "prefer-stable": true
 }
