@@ -11,10 +11,10 @@ use Karomap\PHPOGC\OGCObject;
  */
 class LineString extends OGCObject implements \Countable
 {
-    protected $type = "LINESTRING";
+    protected $type = 'LINESTRING';
 
     /**
-     * @var array
+     * @var Point[]
      */
     public $points = [];
 
@@ -24,16 +24,16 @@ class LineString extends OGCObject implements \Countable
      * A LineString must be instantiate with a Points array
      * es. [new Point(lat, lon), new Point(lat, lon)]
      *
-     * @param array $points
+     * @param Point[] $points
      * @throws GeoSpatialException
      */
     public function __construct(array $points)
     {
-        if( sizeof($points) < 2 )
-            throw new GeoSpatialException("A LineString instance must be composed by at least 2 points.");
+        if (sizeof($points) < 2)
+            throw new GeoSpatialException('A LineString instance must be composed by at least 2 points.');
 
-        $this->points = array_map(function($p){
-            if( ! $p instanceof Point )
+        $this->points = array_map(function ($p) {
+            if (!$p instanceof Point)
                 throw new GeoSpatialException('A LineString instance must be constructed directly with Points array only.');
             return $p;
         }, $points);
@@ -43,13 +43,13 @@ class LineString extends OGCObject implements \Countable
      * A Linestring could be constructed with an array of points-array.
      *
      * es. [[lat, lon], [lat, lon], [lat, lon], ..]
-     * @param array $points
+     * @param Point[] $points
      * @return LineString
      */
     public static function fromArray(array $points)
     {
-        $parsed_points = array_map(function($p){
-            if( !is_array($p) or sizeof($p) != 2)
+        $parsed_points = array_map(function ($p) {
+            if (!is_array($p) or sizeof($p) != 2)
                 throw new GeoSpatialException('Error: array of array containing lat, lon expected.');
             return new Point($p[0], $p[1]);
         }, $points);
@@ -61,17 +61,17 @@ class LineString extends OGCObject implements \Countable
      * are divided by " ". Separators must be different.
      * es. "lat lon, lat lon"
      *
-     * @param $points
+     * @param string $points
      * @param string $points_separator
      * @param string $coords_separator
      * @throws GeoSpatialException
      * @return LineString
      */
-    public static function fromString($points, $points_separator = ",", $coords_separator = " ")
+    public static function fromString($points, $points_separator = ',', $coords_separator = ' ')
     {
-        if($points_separator == $coords_separator)
-            throw new GeoSpatialException("Error: separators must be different");
-        $parsed_points = array_map(function($p) use ($coords_separator){
+        if ($points_separator == $coords_separator)
+            throw new GeoSpatialException('Error: separators must be different');
+        $parsed_points = array_map(function ($p) use ($coords_separator) {
             return Point::fromString($p, $coords_separator);
         }, explode($points_separator, trim($points)));
         return new static($parsed_points);
@@ -85,20 +85,20 @@ class LineString extends OGCObject implements \Countable
 
     protected function toValueArray()
     {
-        return array_map(function($point){
+        return array_map(function ($point) {
             return $point->toArray();
         }, $this->points);
     }
 
     public function __toString()
     {
-        return implode(",", array_map(function($p){
-            return (string)$p;
+        return implode(',', array_map(function ($p) {
+            return (string) $p;
         }, $this->points));
     }
 
     /**
-     * Implementazione dell'interfaccia countable
+     * Countable interface implementation
      *
      * @return int
      */
@@ -114,23 +114,23 @@ class LineString extends OGCObject implements \Countable
      */
     public function isCircular()
     {
-        return count($this->points) > 3 &&  $this->points[0] == $this->points[ count($this->points) -1 ];
+        return count($this->points) > 3 &&  $this->points[0] == $this->points[count($this->points) - 1];
     }
 
 
     /**
      * Return the lenght of the linestring expressed in meters.
      *
+     * @param string $provider (optional) One of "haversine" or "vincenty". Default to "haversine"
      * @return int
      */
-    public function lenght($provider = "haversine")
+    public function lenght($provider = 'haversine')
     {
         $length = 0;
-        for($i = 0; $i < count($this)-2 ; $i++ ){
-            $length += Point::distance($this->points[$i], $this->points[$i+1], $provider);
+        for ($i = 0; $i < count($this) - 2; $i++) {
+            $length += Point::distance($this->points[$i], $this->points[$i + 1], $provider);
         }
         return $length;
-
     }
 
 
@@ -150,36 +150,24 @@ class LineString extends OGCObject implements \Countable
      */
     public function insertPoint(Point $p)
     {
-         //echo "aggiungo punto p:$p\n";
-         //echo "lunghezz attuale ls: " . count($this)."\n";
-         // Se il punto è già presente nella LineString non faccio modifiche
-         if(array_search($p, $this->points) !== false){
-             //echo "punto già presente";
-             return;
-         }
+        // Se il punto è già presente nella LineString non faccio modifiche
+        if (array_search($p, $this->points) !== false) {
+            return;
+        }
 
         $threshold = 0.02;
-        for( $i = 0 ; $i < count($this->points) - 2 ; $i++ ) {
-
-            //echo "valuto $i-esima coppia di punti: " .$this->points[$i]. " " .$this->points[$i+1]. "\n";
-
+        for ($i = 0; $i < count($this->points) - 2; $i++) {
             $distance       = Point::distance($this->points[$i], $p) + Point::distance($p, $this->points[$i + 1]);
             $step_distance  = Point::distance($this->points[$i], $this->points[$i + 1]);
 
-            //echo "distanza totale: \t\t $distance\n";
-            //echo "step distance: \t\t\t $step_distance\n";
-
-            if( $distance > $step_distance - ($step_distance*$threshold) && $distance < ($step_distance + $step_distance*$threshold) ){
-                $newpoints = array_slice( $this->points, 0, $i+1, true );
-                $newpoints = array_merge( $newpoints, [$p] );
-                $newpoints = array_merge( $newpoints, array_slice($this->points, $i+1, count($this->points) - ($i+1)) );
+            if ($distance > $step_distance - ($step_distance * $threshold) && $distance < ($step_distance + $step_distance * $threshold)) {
+                $newpoints = array_slice($this->points, 0, $i + 1, true);
+                $newpoints = array_merge($newpoints, [$p]);
+                $newpoints = array_merge($newpoints, array_slice($this->points, $i + 1, count($this->points) - ($i + 1)));
                 $this->points = $newpoints;
                 break;
-
             }
         }
-
-         //echo "lunghezza finale ls: " . count($this)."\n";
     }
 
 
@@ -232,14 +220,13 @@ class LineString extends OGCObject implements \Countable
      */
     public function split(Point $split)
     {
-
         // if the point split is the first or the last, we returns the whole linestring
         reset($this->points);
-        if( $this->points[0] == $split){
+        if ($this->points[0] == $split) {
             return [$split, $this];
         }
 
-        if ($this->points[count($this->points)-1] == $split){
+        if ($this->points[count($this->points) - 1] == $split) {
             return [$this, $split];
         }
 
@@ -247,13 +234,11 @@ class LineString extends OGCObject implements \Countable
         $position = array_search($split, $this->points);
 
         // if the split point is not found, we return the whole linestring
-        if($position === false){
+        if ($position === false) {
             return [$this, null];
-        }
-
-        else{
-            array_push( $splitted, new LineString(array_slice($this->points, 0, $position+1)) );
-            array_push( $splitted, new LineString(array_slice($this->points, $position, count($this->points) - $position ) ) );
+        } else {
+            array_push($splitted, new LineString(array_slice($this->points, 0, $position + 1)));
+            array_push($splitted, new LineString(array_slice($this->points, $position, count($this->points) - $position)));
         }
         return $splitted;
     }
@@ -267,11 +252,10 @@ class LineString extends OGCObject implements \Countable
     public static function diff(LineString $l1, LineString $l2)
     {
         $diffs = array_diff($l1->points, $l2->points);
-        foreach($diffs as $diff){
+        foreach ($diffs as $diff) {
             $pos = array_search($diff, $l1->points);
             echo "Il point $diff è presente solo nella prima LineString, in posizione $pos\n";
         }
         return $diffs;
     }
-
 }

@@ -7,11 +7,22 @@ use Karomap\PHPOGC\OGCObject;
 
 class Point extends OGCObject
 {
-    protected $type = "POINT";
+    protected $type = 'POINT';
 
-    protected static $greatCircleproviders = [ 'haversine', 'vincenty' ];
+    protected static $greatCircleproviders = ['haversine', 'vincenty'];
 
+    /**
+     * Latitude or Y
+     *
+     * @var float
+     */
     public $lat;
+
+    /**
+     * Logitude or X
+     *
+     * @var float
+     */
     public $lon;
     public $address = null;
 
@@ -22,8 +33,8 @@ class Point extends OGCObject
      *      $point = new Point(1.123, 2.345)
      *      $point = new Point("1.1232", "2.345")
      *
-     * @param $lat
-     * @param $lon
+     * @param string|float $lat
+     * @param string|float $lon
      */
     public function __construct($lat, $lon)
     {
@@ -42,7 +53,7 @@ class Point extends OGCObject
      */
     public static function fromArray(array $points)
     {
-        if(count($points) != 2)
+        if (count($points) != 2)
             throw new GeoSpatialException('Error: wrong number of array elements, two needed');
 
         return new Point($points[0], $points[1]);
@@ -58,11 +69,11 @@ class Point extends OGCObject
      * @throws GeoSpatialException
      * @return Point
      */
-    public static function fromString($points, $separator = " ")
+    public static function fromString($points, $separator = ' ')
     {
         $p = explode($separator, trim($points));
 
-        if(count($p) != 2)
+        if (count($p) != 2)
             throw new GeoSpatialException('Error creating Point from string ' . $points);
 
         return new Point($p[0], $p[1]);
@@ -97,21 +108,21 @@ class Point extends OGCObject
      *
      * @param Point $p1
      * @param Point $p2
-     * @param string $provider
+     * @param string $provider (optional) One of "haversine" or "vincenty". Default to "haversine"
      * @return float
      * @throws GeoSpatialException
      */
-    public static function distance(Point $p1, Point $p2, $provider = "haversine")
+    public static function distance(Point $p1, Point $p2, $provider = 'haversine')
     {
-        switch ($provider){
-            case "haversine":
+        switch ($provider) {
+            case 'haversine':
                 return self::haversineGreatCircleDistance($p1, $p2);
 
-            case "vincenty":
+            case 'vincenty':
                 return self::vincentyGreatCircleDistance($p1, $p2);
 
             default:
-                throw new GeoSpatialException('Great circle distance provider not found, providers available: ' . implode(", ", self::$greatCircleproviders));
+                throw new GeoSpatialException('Great circle distance provider not found, providers available: ' . implode(', ', self::$greatCircleproviders));
         }
     }
 
@@ -152,7 +163,7 @@ class Point extends OGCObject
         $latDelta = $latTo - $latFrom;
         $lonDelta = $lonTo - $lonFrom;
         $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
-                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+            cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
     }
 }

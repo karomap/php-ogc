@@ -13,15 +13,21 @@ use Karomap\PHPOGC\OGCObject;
  */
 class GeometryCollection extends OGCObject implements \Countable
 {
-    protected $type = "GEOMETRYCOLLECTION";
+    protected $type = 'GEOMETRYCOLLECTION';
 
     public $geometries = [];
 
+    /**
+     * GeometryCollection constructor.
+     *
+     * @param OGCObject[] $ogcobjects
+     * @throws GeospatialException
+     */
     public function __construct(array $ogcobjects)
     {
-        array_walk($ogcobjects, function($ogcobject){
-           if(! $ogcobject instanceof OGCObject)
-               throw new GeoSpatialException("A GeometryCollection must be constructed with an array of OGCObject objects");
+        array_walk($ogcobjects, function ($ogcobject) {
+            if (!$ogcobject instanceof OGCObject)
+                throw new GeoSpatialException('A GeometryCollection must be constructed with an array of OGCObject objects');
         });
         $this->geometries = $ogcobjects;
     }
@@ -33,7 +39,7 @@ class GeometryCollection extends OGCObject implements \Countable
     */
     protected function toValueArray()
     {
-        return array_map(function($ogcobject){
+        return array_map(function ($ogcobject) {
             return [
                 'type' => $ogcobject->type,
                 'value' => $ogcobject->toArray()
@@ -43,11 +49,14 @@ class GeometryCollection extends OGCObject implements \Countable
 
     public function __toString()
     {
-        return implode(",", array_map(function($g){
+        return implode(',', array_map(function ($g) {
             return $g->toWKT();
-        }, $this->geometries));    }
+        }, $this->geometries));
+    }
 
     /**
+     * Countable interface implementation
+     *
      * @return int
      */
     public function count()

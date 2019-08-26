@@ -2,6 +2,7 @@
 
 namespace Karomap\PHPOGC;
 
+use ArrayAccess;
 use CrEOF\Geo\WKB\Parser as WKBParser;
 use CrEOF\Geo\WKT\Parser as WKTParser;
 
@@ -17,19 +18,31 @@ abstract class OGCObject
         'GEOMETRYCOLLECTION' => 'GeometryCollection',
     ];
 
+    /**
+     * WKT
+     *
+     * @var string|null
+     */
     private $wkt = null;
+
+    /**
+     * WKB
+     *
+     * @var string|null
+     */
     private $wkb = null;
+
+    protected $type = '';
 
     /**
      * @param $name
-     * @return null
+     * @return mixed
      */
     public function __get($name)
     {
-        if(strtolower($name) == "wkt"){
+        if (strtolower($name) == 'wkt') {
             return ($this->wkt == null ? $this->wkt = $this->toWKT() : $this->wkt);
-
-        }elseif(strtolower($name) == "wkb"){
+        } elseif (strtolower($name) == 'wkb') {
             return ($this->wkb == null ? $this->wkb = $this->toWKB() : $this->wkb);
         }
     }
@@ -53,7 +66,7 @@ abstract class OGCObject
 
         if ($parsed['type'] == 'GEOMETRYCOLLECTION') {
             $ogcObjects = [];
-            array_walk($parsed['value'], function($ogcArray) use(&$ogcObjects) {
+            array_walk($parsed['value'], function ($ogcArray) use (&$ogcObjects) {
                 if (array_key_exists('type', $ogcArray)) {
                     $ogcClass = self::buildClassName($ogcArray['type']);
                     $ogcObjects[] = $ogcClass::fromArray($ogcArray['value']);
@@ -105,11 +118,33 @@ abstract class OGCObject
         return $geo;
     }
 
+    /**
+     * Array representation of coordinates
+     *
+     * @return array
+     */
+    abstract protected function toValueArray();
+
+    /**
+     * Array representation of OGCObject
+     *
+     * @return array
+     */
     public function toArray()
     {
         return [
             'type' => $this->type,
             'value' => $this->toValueArray()
         ];
+    }
+
+    /**
+     * String representation of OGCObject
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->wkt ?? $this->toWKT();
     }
 }

@@ -7,22 +7,27 @@ use Karomap\PHPOGC\OGCObject;
 
 class MultiPolygon extends OGCObject implements \Countable
 {
-    protected $type = "MULTIPOLYGON";
+    protected $type = 'MULTIPOLYGON';
 
+    /**
+     * Polygons
+     *
+     * @var Polygon[]
+     */
     public $polygons = [];
 
     /**
      * MultiPolygon constructor.
-     * @param array $polygons
+     * @param Polygon[] $polygons
      * @throws GeoSpatialException
      */
     public function __construct(array $polygons)
     {
-        if(empty($polygons))
+        if (empty($polygons))
             throw new GeoSpatialException('A MultiPolygon cannot be empty');
 
-        array_walk($polygons, function($polygon){
-            if(!$polygon instanceof Polygon)
+        array_walk($polygons, function ($polygon) {
+            if (!$polygon instanceof Polygon)
                 throw new GeoSpatialException('A MultiPolygon must be instantiated with an array of Polygon objects');
         });
 
@@ -35,7 +40,7 @@ class MultiPolygon extends OGCObject implements \Countable
      */
     public static function fromArray(array $polygons)
     {
-        $parsed_polygons = array_map(function($polygon){
+        $parsed_polygons = array_map(function ($polygon) {
             return Polygon::fromArray($polygon);
         }, $polygons);
         return new static($parsed_polygons);
@@ -50,27 +55,17 @@ class MultiPolygon extends OGCObject implements \Countable
      * @return MultiPolygon
      * @throws GeoSpatialException
      */
-    public static function fromString($polygons, $polygons_separator = "|", $linestrings_separator = ";", $points_separator = ",", $coords_separator = " ")
+    public static function fromString($polygons, $polygons_separator = '|', $linestrings_separator = ';', $points_separator = ',', $coords_separator = ' ')
     {
         $separators = [$polygons_separator, $linestrings_separator, $points_separator, $coords_separator];
-        if(sizeof($separators) != sizeof(array_unique($separators)))
-            throw new GeoSpatialException("Error: separators must be different");
+        if (sizeof($separators) != sizeof(array_unique($separators)))
+            throw new GeoSpatialException('Error: separators must be different');
 
-        $parsed_polygons = array_map(function($polygon) use ($linestrings_separator, $points_separator, $coords_separator){
+        $parsed_polygons = array_map(function ($polygon) use ($linestrings_separator, $points_separator, $coords_separator) {
             return Polygon::fromString($polygon, $linestrings_separator, $points_separator, $coords_separator);
         }, explode($polygons_separator, trim($polygons)));
 
         return new static($parsed_polygons);
-    }
-
-    /**
-     * Implementazione dell'interfaccia countable
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->polygons);
     }
 
     /*
@@ -80,15 +75,25 @@ class MultiPolygon extends OGCObject implements \Countable
     */
     protected function toValueArray()
     {
-        return array_map(function($polygon){
+        return array_map(function ($polygon) {
             return $polygon->toArray();
         }, $this->polygons);
     }
 
     public function __toString()
     {
-        return implode(",", array_map(function($p){
+        return implode(',', array_map(function ($p) {
             return "($p)";
         }, $this->polygons));
+    }
+
+    /**
+     * Countable interface implementation
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->polygons);
     }
 }

@@ -4,7 +4,7 @@ namespace Karomap\PHPOGC\DataTypes;
 
 class MultiLineString extends Polygon
 {
-    protected $type = "MULTILINESTRING";
+    protected $type = 'MULTILINESTRING';
 
     public function __construct(array $linestrings)
     {
