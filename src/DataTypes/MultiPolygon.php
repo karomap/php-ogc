@@ -19,9 +19,10 @@ class MultiPolygon extends OGCObject implements \Countable
     /**
      * MultiPolygon constructor.
      * @param Polygon[] $polygons
+     * @param integer $srid
      * @throws GeoSpatialException
      */
-    public function __construct(array $polygons)
+    public function __construct(array $polygons, $srid = null)
     {
         if (empty($polygons))
             throw new GeoSpatialException('A MultiPolygon cannot be empty');
@@ -32,6 +33,9 @@ class MultiPolygon extends OGCObject implements \Countable
         });
 
         $this->polygons = $polygons;
+
+        if ($srid)
+            $this->srid = $srid;
     }
 
     /**

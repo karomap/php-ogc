@@ -6,8 +6,14 @@ class MultiLineString extends Polygon
 {
     protected $type = 'MULTILINESTRING';
 
-    public function __construct(array $linestrings)
+    /**
+     * MultiLineString constructor.
+     *
+     * @param array $linestrings
+     * @param integer $srid
+     */
+    public function __construct(array $linestrings, $srid = null)
     {
-        parent::__construct($linestrings, false);
+        parent::__construct($linestrings, false, $srid);
     }
 }

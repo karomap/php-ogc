@@ -6,8 +6,14 @@ class MultiPoint extends LineString
 {
     protected $type = 'MULTIPOINT';
 
-    public function __construct(array $points)
+    /**
+     * MultiPoint constructor.
+     *
+     * @param array $points
+     * @param integer $srid
+     */
+    public function __construct(array $points, $srid = null)
     {
-        parent::__construct($points);
+        parent::__construct($points, $srid);
     }
 }

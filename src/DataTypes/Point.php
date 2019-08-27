@@ -35,11 +35,15 @@ class Point extends OGCObject
      *
      * @param string|float $lat
      * @param string|float $lon
+     * @param integer $srid
      */
-    public function __construct($lat, $lon)
+    public function __construct($lat, $lon, $srid = null)
     {
         $this->lat = (float) $lat;
         $this->lon = (float) $lon;
+
+        if ($srid)
+            $this->srid = $srid;
     }
 
     /**

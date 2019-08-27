@@ -15,13 +15,17 @@ class Polygon extends OGCObject implements \Countable
      * Polygon constructor. A Polygon must be constructed with at least 1 closed linestring.
      *
      * @param array $linestrings
+     * @param integer $srid
      */
-    public function __construct(array $linestrings, $circular_check = true)
+    public function __construct(array $linestrings, $circular_check = true, $srid = null)
     {
         array_walk($linestrings, [$this, 'is_linestring']);
         // check that all array elements are LineString instances, and that all of them are closed (circular)
         if ($circular_check) array_walk($linestrings, [$this, 'is_circular_linestring']);
         $this->linestrings = $linestrings;
+
+        if ($srid)
+            $this->srid = $srid;
     }
 
     /**

@@ -32,7 +32,19 @@ abstract class OGCObject
      */
     private $wkb = null;
 
+    /**
+     * OGC type
+     *
+     * @var string
+     */
     protected $type = '';
+
+    /**
+     * SRID / CRS
+     *
+     * @var integer
+     */
+    public $srid = 0;
 
     /**
      * @param $name
@@ -72,10 +84,14 @@ abstract class OGCObject
                     $ogcObjects[] = $ogcClass::fromArray($ogcArray['value']);
                 }
             });
-            return new $typeClass($ogcObjects);
+            $instance = new $typeClass($ogcObjects);
+        } else {
+            $instance = $typeClass::fromArray($parsed['value']);
         }
 
-        return $typeClass::fromArray($parsed['value']);
+        $instance->srid = $parsed['srid'];
+
+        return $instance;
     }
 
     /**

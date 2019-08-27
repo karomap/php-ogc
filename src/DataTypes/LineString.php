@@ -25,9 +25,10 @@ class LineString extends OGCObject implements \Countable
      * es. [new Point(lat, lon), new Point(lat, lon)]
      *
      * @param Point[] $points
+     * @param integer $srid
      * @throws GeoSpatialException
      */
-    public function __construct(array $points)
+    public function __construct(array $points, $srid = null)
     {
         if (sizeof($points) < 2)
             throw new GeoSpatialException('A LineString instance must be composed by at least 2 points.');
@@ -37,6 +38,9 @@ class LineString extends OGCObject implements \Countable
                 throw new GeoSpatialException('A LineString instance must be constructed directly with Points array only.');
             return $p;
         }, $points);
+
+        if ($srid)
+            $this->srid = $srid;
     }
 
     /**

@@ -21,15 +21,19 @@ class GeometryCollection extends OGCObject implements \Countable
      * GeometryCollection constructor.
      *
      * @param OGCObject[] $ogcobjects
+     * @param integer $srid
      * @throws GeospatialException
      */
-    public function __construct(array $ogcobjects)
+    public function __construct(array $ogcobjects, $srid = null)
     {
         array_walk($ogcobjects, function ($ogcobject) {
             if (!$ogcobject instanceof OGCObject)
                 throw new GeoSpatialException('A GeometryCollection must be constructed with an array of OGCObject objects');
         });
         $this->geometries = $ogcobjects;
+
+        if ($srid)
+            $this->srid = $srid;
     }
 
     /*
