@@ -2,7 +2,6 @@
 
 namespace Karomap\PHPOGC;
 
-use ArrayAccess;
 use CrEOF\Geo\WKB\Parser as WKBParser;
 use CrEOF\Geo\WKT\Parser as WKTParser;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Karomap\PHPOGC;
+namespace Tests;
 
 use Karomap\PHPOGC\DataTypes\Point;
 use PHPUnit\Framework\TestCase;

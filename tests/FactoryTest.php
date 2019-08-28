@@ -1,6 +1,6 @@
 <?php
 
-namespace Karomap\PHPOGC;
+namespace Tests;
 
 use Karomap\PHPOGC\DataTypes\MultiLineString;
 use Karomap\PHPOGC\DataTypes\MultiPoint;
