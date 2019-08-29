@@ -6,14 +6,20 @@ use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
 /**
- * Class LineString
- * @package php-ogc
+ * OGC LineString type
  */
 class LineString extends OGCObject implements \Countable
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'LINESTRING';
 
     /**
+     * Point collection.
+     *
      * @var Point[]
      */
     public $points = [];
@@ -25,7 +31,8 @@ class LineString extends OGCObject implements \Countable
      * es. [new Point(lat, lon), new Point(lat, lon)]
      *
      * @param Point[] $points
-     * @param integer $srid
+     * @param int $srid
+     * @return void
      * @throws GeoSpatialException
      */
     public function __construct(array $points, $srid = null)
@@ -99,16 +106,6 @@ class LineString extends OGCObject implements \Countable
         return implode(',', array_map(function ($p) {
             return (string) $p;
         }, $this->points));
-    }
-
-    /**
-     * Countable interface implementation
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->points);
     }
 
     /**
@@ -261,5 +258,15 @@ class LineString extends OGCObject implements \Countable
             echo "Il point $diff è presente solo nella prima LineString, in posizione $pos\n";
         }
         return $diffs;
+    }
+
+    /**
+     * Countable interface implementation
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->points);
     }
 }

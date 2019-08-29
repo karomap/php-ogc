@@ -5,17 +5,32 @@ namespace Karomap\PHPOGC\DataTypes;
 use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
+/**
+ * OGC Polygon type
+ */
 class Polygon extends OGCObject implements \Countable
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'POLYGON';
 
+    /**
+     * LineString collection.
+     *
+     * @var LineString[]
+     */
     public $linestrings = [];
 
     /**
      * Polygon constructor. A Polygon must be constructed with at least 1 closed linestring.
      *
      * @param array $linestrings
-     * @param integer $srid
+     * @param bool $circular_check
+     * @param int $srid
+     * @return void
      */
     public function __construct(array $linestrings, $circular_check = true, $srid = null)
     {
@@ -29,11 +44,9 @@ class Polygon extends OGCObject implements \Countable
     }
 
     /**
-     * A Polygon could be instantiated with an array like that:
+     * A Polygon could be instantiated with an array like this:
      *
      * [ [[x,y],[x,y],[x,y]], [[x,y],[x,y],[x,y]], ..., [[x,y],[x,y],[x,y]] ]
-     *   ^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^       ^^^^^^^^^^^^^^^^^^^
-     *   external linestring  1st internal linest       i-th internal linest
      *
      * @param array $linestrings
      * @return Polygon

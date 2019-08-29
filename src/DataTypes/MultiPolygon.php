@@ -5,12 +5,20 @@ namespace Karomap\PHPOGC\DataTypes;
 use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
+/**
+ * OGC MultiPolygon type
+ */
 class MultiPolygon extends OGCObject implements \Countable
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'MULTIPOLYGON';
 
     /**
-     * Polygons
+     * Polygon collection.
      *
      * @var Polygon[]
      */
@@ -19,7 +27,8 @@ class MultiPolygon extends OGCObject implements \Countable
     /**
      * MultiPolygon constructor.
      * @param Polygon[] $polygons
-     * @param integer $srid
+     * @param int $srid
+     * @return void
      * @throws GeoSpatialException
      */
     public function __construct(array $polygons, $srid = null)

@@ -2,15 +2,24 @@
 
 namespace Karomap\PHPOGC\DataTypes;
 
+/**
+ * OGC MultiLineString type
+ */
 class MultiLineString extends Polygon
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'MULTILINESTRING';
 
     /**
      * MultiLineString constructor.
      *
      * @param array $linestrings
-     * @param integer $srid
+     * @param int $srid
+     * @return void
      */
     public function __construct(array $linestrings, $srid = null)
     {

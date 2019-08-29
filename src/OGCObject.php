@@ -5,6 +5,9 @@ namespace Karomap\PHPOGC;
 use CrEOF\Geo\WKB\Parser as WKBParser;
 use CrEOF\Geo\WKT\Parser as WKTParser;
 
+/**
+ * Abstract class represent Open Geospatial Consortium (OGC) geometry type
+ */
 abstract class OGCObject
 {
     private static $types_map = [
@@ -32,21 +35,23 @@ abstract class OGCObject
     private $wkb = null;
 
     /**
-     * OGC type
+     * OGC type.
      *
      * @var string
      */
     protected $type = '';
 
     /**
-     * SRID / CRS
+     * Spatial Reference System Identifier (SRID).
      *
-     * @var integer
+     * @var int
      */
     public $srid = 0;
 
     /**
-     * @param $name
+     * Get an object property.
+     *
+     * @param string $name
      * @return mixed
      */
     public function __get($name)
@@ -59,7 +64,9 @@ abstract class OGCObject
     }
 
     /**
-     * @param $type
+     * Get PHP class name for the given OGC type.
+     *
+     * @param string $type
      * @return string
      */
     private static function buildClassName($type)
@@ -68,8 +75,10 @@ abstract class OGCObject
     }
 
     /**
-     * @param $parsed
-     * @return mixed
+     * Create an OGCObject instance from parsed WKB/WKT.
+     *
+     * @param array $parsed
+     * @return OGCObject
      */
     public static function buildOGCObject($parsed)
     {
@@ -94,18 +103,44 @@ abstract class OGCObject
     }
 
     /**
-     * @param $wkt
-     * @return mixed
+     * Create an OGCObject instance from WKT.
+     *
+     * @param string $wkt
+     * @param int|null $srid
+     * @return OGCObject
      */
-    public static function fromWKT($wkt)
+    public static function fromWKT($wkt, $srid = null)
     {
         $parser = new WKTParser();
         $geo = self::buildOGCObject($parser->parse($wkt));
         $geo->wkt = $wkt;
+        if ($srid) {
+            $geo->srid = $srid;
+        }
         return $geo;
     }
 
     /**
+     * Create an OGCObject instance from WKB.
+     *
+     * @param $wkb
+     * @param int|null $srid
+     * @return OGCObject
+     */
+    public static function fromWKB($wkb, $srid = null)
+    {
+        $parser = new WKBParser();
+        $geo = self::buildOGCObject($parser->parse($wkb));
+        $geo->wkb = $wkb;
+        if ($srid) {
+            $geo->srid = $srid;
+        }
+        return $geo;
+    }
+
+    /**
+     * Get WKT representation of the instance.
+     *
      * @return string
      */
     public function toWKT()
@@ -114,6 +149,9 @@ abstract class OGCObject
     }
 
     /**
+     * (not implemented)
+     * Get WKB representation of the instance.
+     *
      * @throws \Exception
      */
     public function toWKB()
@@ -122,26 +160,14 @@ abstract class OGCObject
     }
 
     /**
-     * @param $wkb
-     * @return mixed
-     */
-    public static function fromWKB($wkb)
-    {
-        $parser = new WKBParser();
-        $geo = self::buildOGCObject($parser->parse($wkb));
-        $geo->wkb = $wkb;
-        return $geo;
-    }
-
-    /**
-     * Array representation of coordinates
+     * Array representation of instance coordinates.
      *
      * @return array
      */
     abstract protected function toValueArray();
 
     /**
-     * Array representation of OGCObject
+     * Array representation of the instance.
      *
      * @return array
      */
@@ -154,7 +180,7 @@ abstract class OGCObject
     }
 
     /**
-     * String representation of OGCObject
+     * String representation of the instance.
      *
      * @return string
      */

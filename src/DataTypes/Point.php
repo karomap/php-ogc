@@ -5,11 +5,24 @@ namespace Karomap\PHPOGC\DataTypes;
 use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
+/**
+ * OGC Point type
+ */
 class Point extends OGCObject
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'POINT';
 
-    protected static $greatCircleproviders = ['haversine', 'vincenty'];
+    /**
+     * Great circle distance providers.
+     *
+     * @var array
+     */
+    protected static $greatCircleProviders = ['haversine', 'vincenty'];
 
     /**
      * Latitude or Y
@@ -24,6 +37,12 @@ class Point extends OGCObject
      * @var float
      */
     public $lon;
+
+    /**
+     * Point address.
+     *
+     * @var string|null
+     */
     public $address = null;
 
     /**
@@ -35,7 +54,8 @@ class Point extends OGCObject
      *
      * @param string|float $lat
      * @param string|float $lon
-     * @param integer $srid
+     * @param int $srid
+     * @return void
      */
     public function __construct($lat, $lon, $srid = null)
     {
@@ -126,7 +146,7 @@ class Point extends OGCObject
                 return self::vincentyGreatCircleDistance($p1, $p2);
 
             default:
-                throw new GeoSpatialException('Great circle distance provider not found, providers available: ' . implode(', ', self::$greatCircleproviders));
+                throw new GeoSpatialException('Great circle distance provider not found, providers available: ' . implode(', ', self::$greatCircleProviders));
         }
     }
 

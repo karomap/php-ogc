@@ -6,22 +6,32 @@ use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
 /**
- * Class GeometryCollection
- * @package php-ogc
+ * OGC GeometryCollection type
  *
  * TODO: implements fromString and fromArray methods
  */
 class GeometryCollection extends OGCObject implements \Countable
 {
+    /**
+     * OGC type.
+     *
+     * @var string
+     */
     protected $type = 'GEOMETRYCOLLECTION';
 
+    /**
+     * OGCObject collection.
+     *
+     * @var OGCObject[]
+     */
     public $geometries = [];
 
     /**
      * GeometryCollection constructor.
      *
      * @param OGCObject[] $ogcobjects
-     * @param integer $srid
+     * @param int $srid
+     * @return void
      * @throws GeospatialException
      */
     public function __construct(array $ogcobjects, $srid = null)
