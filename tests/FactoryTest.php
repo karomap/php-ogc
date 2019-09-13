@@ -8,6 +8,7 @@ use Karomap\PHPOGC\DataTypes\MultiPolygon;
 use Karomap\PHPOGC\DataTypes\LineString;
 use Karomap\PHPOGC\DataTypes\Point;
 use Karomap\PHPOGC\DataTypes\Polygon;
+use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
@@ -228,12 +229,11 @@ class FactoryTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Karomap\PHPOGC\Exceptions\GeoSpatialException
-     * @expectedExceptionMessage A LineString instance that compose a Polygon must be circular (min 4 points, first and last equals).
-     */
     public function testPolygonFails1()
     {
+        $this->expectException(GeoSpatialException::class);
+        $this->expectExceptionMessage('A LineString instance that compose a Polygon must be circular (min 4 points, first and last equals).');
+
         $p1 = new Point(1, 1);
         $p2 = new Point(2, 2);
         $p3 = new Point(3, 3);
