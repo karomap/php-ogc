@@ -2,10 +2,10 @@
 
 namespace Tests;
 
+use Karomap\PHPOGC\DataTypes\LineString;
 use Karomap\PHPOGC\DataTypes\MultiLineString;
 use Karomap\PHPOGC\DataTypes\MultiPoint;
 use Karomap\PHPOGC\DataTypes\MultiPolygon;
-use Karomap\PHPOGC\DataTypes\LineString;
 use Karomap\PHPOGC\DataTypes\Point;
 use Karomap\PHPOGC\DataTypes\Polygon;
 use Karomap\PHPOGC\Exceptions\GeoSpatialException;
@@ -26,8 +26,10 @@ class FactoryTest extends TestCase
 
         foreach ($points as $point) {
             $this->assertTrue($point instanceof Point);
-            $this->assertEquals($point->lat, 1.234);
-            $this->assertEquals($point->lon, 2.345);
+            $this->assertEquals($point->lon, 1.234);
+            $this->assertEquals($point->lat, 2.345);
+            $this->assertEquals($point->x, 1.234);
+            $this->assertEquals($point->y, 2.345);
         }
     }
 
@@ -77,12 +79,12 @@ class FactoryTest extends TestCase
         $multipoints[] = MultiPoint::fromArray([[1, 2], [3, 4], [5, 6]]);
 
         foreach ($multipoints as $multipoint) {
-            $this->assertEquals($multipoint->points[0]->lat, 1);
-            $this->assertEquals($multipoint->points[0]->lon, 2);
-            $this->assertEquals($multipoint->points[1]->lat, 3);
-            $this->assertEquals($multipoint->points[1]->lon, 4);
-            $this->assertEquals($multipoint->points[2]->lat, 5);
-            $this->assertEquals($multipoint->points[2]->lon, 6);
+            $this->assertEquals($multipoint->points[0]->lon, 1);
+            $this->assertEquals($multipoint->points[0]->lat, 2);
+            $this->assertEquals($multipoint->points[1]->lon, 3);
+            $this->assertEquals($multipoint->points[1]->lat, 4);
+            $this->assertEquals($multipoint->points[2]->lon, 5);
+            $this->assertEquals($multipoint->points[2]->lat, 6);
         }
     }
 
@@ -105,7 +107,6 @@ class FactoryTest extends TestCase
 
         $linestring1 = new LineString([$p1, $p2, $p3, $p4, $p5]);
         $linestring2 = new LineString([$p1, $p2]);
-
 
         $splitted = $linestring1->split($p2);
         $this->assertEquals($splitted[0], $linestring2);
@@ -166,9 +167,9 @@ class FactoryTest extends TestCase
         $polygons[] = new Polygon([$linestring1]);
         $polygons[] = new Polygon([$linestring1, $linestring2]);
         $polygons[] = Polygon::fromString($linestring3);
-        $polygons[] = Polygon::fromString($linestring3 . ';' . $linestring3);
-        $polygons[] = Polygon::fromString($linestring4 . '#' . $linestring4, '#', ':');
-        $polygons[] = Polygon::fromString($linestring5 . '@' . $linestring5, '@', ':', '_');
+        $polygons[] = Polygon::fromString($linestring3.';'.$linestring3);
+        $polygons[] = Polygon::fromString($linestring4.'#'.$linestring4, '#', ':');
+        $polygons[] = Polygon::fromString($linestring5.'@'.$linestring5, '@', ':', '_');
 
         foreach ($polygons as $poly) {
             $this->assertTrue($poly instanceof Polygon);
@@ -199,23 +200,23 @@ class FactoryTest extends TestCase
         $polygons[] = new Polygon([$linestring1]);
         $polygons[] = new Polygon([$linestring1, $linestring2]);
         $polygons[] = Polygon::fromString($linestring3);
-        $polygons[] = Polygon::fromString($linestring3 . ';' . $linestring3);
-        $polygons[] = Polygon::fromString($linestring4 . '#' . $linestring4, '#', ':');
-        $polygons[] = Polygon::fromString($linestring5 . '@' . $linestring5, '@', ':', '_');
+        $polygons[] = Polygon::fromString($linestring3.';'.$linestring3);
+        $polygons[] = Polygon::fromString($linestring4.'#'.$linestring4, '#', ':');
+        $polygons[] = Polygon::fromString($linestring5.'@'.$linestring5, '@', ':', '_');
 
         $multi = new MultiPolygon($polygons);
-        if (!$multi instanceof MultiPolygon)
+        if (!$multi instanceof MultiPolygon) {
             throw new \Exception();
-
+        }
         $mp[] = new MultiPolygon([
             new Polygon([LineString::fromArray([[1, 2], [2, 3], [3, 4], [1, 2]]), LineString::fromArray([[5, 6], [7, 8], [9, 10], [5, 6]])]),
             new Polygon([LineString::fromArray([[1, 2], [2, 3], [3, 4], [1, 2]]), LineString::fromArray([[5, 6], [7, 8], [9, 10], [5, 6]])]),
-            new Polygon([LineString::fromArray([[1, 2], [2, 3], [3, 4], [1, 2]]), LineString::fromArray([[5, 6], [7, 8], [9, 10], [5, 6]])])
+            new Polygon([LineString::fromArray([[1, 2], [2, 3], [3, 4], [1, 2]]), LineString::fromArray([[5, 6], [7, 8], [9, 10], [5, 6]])]),
         ]);
         $mp[] = MultiPolygon::fromArray([
             [[[1, 2], [2, 3], [3, 4], [1, 2]], [[5, 6], [7, 8], [9, 10], [5, 6]]],
             [[[1, 2], [2, 3], [3, 4], [1, 2]], [[5, 6], [7, 8], [9, 10], [5, 6]]],
-            [[[1, 2], [2, 3], [3, 4], [1, 2]], [[5, 6], [7, 8], [9, 10], [5, 6]]]
+            [[[1, 2], [2, 3], [3, 4], [1, 2]], [[5, 6], [7, 8], [9, 10], [5, 6]]],
         ]);
         $mp[] = MultiPolygon::fromString('1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6|1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6|1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6');
         $mp[] = MultiPolygon::fromString('1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6%1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6%1 2, 2 3, 3 4, 1 2; 5 6, 7 8, 9 10, 5 6', '%');
@@ -244,7 +245,6 @@ class FactoryTest extends TestCase
         $this->assertFalse($linestring1->isCircular());
         $poly = new Polygon([$linestring1]);
     }
-
 
     public function testFromWKTSuccess()
     {

@@ -87,7 +87,7 @@
     
 
             <div class="description">
-            <p>OGC LineString type</p>                                </div>
+            <p>OGC LineString type.</p>                                </div>
     
     
     
@@ -129,7 +129,7 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___get">__get</a>(string $name)
+                    <a href="#method___get">__get</a>(string $key)
         
                                             <p>Get an object property.</p>                </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../Karomap/PHPOGC/OGCObject.html#method___get"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a></small></div>
@@ -220,7 +220,7 @@ Get WKB representation of the instance.</p>                </div>
                     void
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(array $points, int $srid = null)
+                    <a href="#method___construct">__construct</a>(array $points, int|null $srid = null)
         
                                             <p>LineString constructor.</p>                </div>
                 <div class="col-md-2"></div>
@@ -273,8 +273,7 @@ are divided by " ". Separators must be different.</p>                </div>
                 <div class="col-md-8 type">
                     <a href="#method_insertPoint">insertPoint</a>(<a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a> $p)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Insert a Point into the LineString.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -306,7 +305,7 @@ by Points, LineStrings or null.</p>                </div>
                 <div class="col-md-8 type">
                     <a href="#method_count">count</a>()
         
-                                            <p>Countable interface implementation</p>                </div>
+                                            <p>Countable interface implementation.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -319,7 +318,7 @@ by Points, LineStrings or null.</p>                </div>
                     <h3 id="method___get">
         <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method___get"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L57">line 57</a></div>
         <code>                    mixed
-    <strong>__get</strong>(string $name)
+    <strong>__get</strong>(string $key)
         </code>
     </h3>
     <div class="details">
@@ -334,7 +333,7 @@ by Points, LineStrings or null.</p>                </div>
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$name</td>
+                <td>$key</td>
                 <td></td>
             </tr>
             </table>
@@ -442,7 +441,7 @@ by Points, LineStrings or null.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_fromWKB">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_fromWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L130">line 130</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_fromWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L132">line 132</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/OGCObject.html"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a>
     <strong>fromWKB</strong>($wkb, int|null $srid = null)
         </code>
@@ -487,7 +486,7 @@ by Points, LineStrings or null.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_toWKT">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKT"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L146">line 146</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKT"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L150">line 150</a></div>
         <code>                    string
     <strong>toWKT</strong>()
         </code>
@@ -517,7 +516,7 @@ by Points, LineStrings or null.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_toWKB">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L157">line 157</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L161">line 161</a></div>
         <code>                    
     <strong>toWKB</strong>()
         </code>
@@ -548,7 +547,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toValueArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L97">line 97</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L106">line 106</a></div>
         <code>            protected        array
     <strong>toValueArray</strong>()
         </code>
@@ -578,7 +577,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toArray">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toArray"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L174">line 174</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toArray"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L178">line 178</a></div>
         <code>                    array
     <strong>toArray</strong>()
         </code>
@@ -608,7 +607,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method___toString">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L104">line 104</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L113">line 113</a></div>
         <code>                    string
     <strong>__toString</strong>()
         </code>
@@ -640,7 +639,7 @@ Get WKB representation of the instance.</p>                                     
                     <h3 id="method___construct">
         <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L38">line 38</a></div>
         <code>                    void
-    <strong>__construct</strong>(array $points, int $srid = null)
+    <strong>__construct</strong>(array $points, int|null $srid = null)
         </code>
     </h3>
     <div class="details">
@@ -649,7 +648,7 @@ Get WKB representation of the instance.</p>                                     
 
                     <div class="method-description">
                                     <p>LineString constructor.</p>                    <p>A LineString must be instantiate with a Points array
-es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </div>
+es. [new Point(lon, lat), new Point(lon, lat)]</p>                            </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -660,7 +659,7 @@ es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </
                 <td></td>
             </tr>
                     <tr>
-                <td>int</td>
+                <td>int|null</td>
                 <td>$srid</td>
                 <td></td>
             </tr>
@@ -693,7 +692,7 @@ es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </
             </div>
                     <div class="method-item">
                     <h3 id="method_fromArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L60">line 60</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L64">line 64</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/DataTypes/LineString.html"><abbr title="Karomap\PHPOGC\DataTypes\LineString">LineString</abbr></a>
     <strong>fromArray</strong>(array $points)
         </code>
@@ -703,7 +702,7 @@ es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </
     
 
                     <div class="method-description">
-                                    <p>A Linestring could be constructed with an array of points-array.</p>                    <p>es. [[lat, lon], [lat, lon], [lat, lon], ..]</p>                            </div>
+                                    <p>A Linestring could be constructed with an array of points-array.</p>                    <p>es. [[lon, lat], [lon, lat], [lon, lat], ..]</p>                            </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -733,7 +732,7 @@ es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </
             </div>
                     <div class="method-item">
                     <h3 id="method_fromString">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L81">line 81</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L88">line 88</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/DataTypes/LineString.html"><abbr title="Karomap\PHPOGC\DataTypes\LineString">LineString</abbr></a>
     <strong>fromString</strong>(string $points, string $points_separator = &#039;,&#039;, string $coords_separator = &#039; &#039;)
         </code>
@@ -744,7 +743,7 @@ es. [new Point(lat, lon), new Point(lat, lon)]</p>                            </
 
                     <div class="method-description">
                                     <p>A Linestring could be instantiated using a string where points are divided by a "," and coordinates
-are divided by " ". Separators must be different.</p>                    <p>es. "lat lon, lat lon"</p>                            </div>
+are divided by " ". Separators must be different.</p>                    <p>es. "lon lat, lon lat".</p>                            </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -793,7 +792,7 @@ are divided by " ". Separators must be different.</p>                    <p>es. 
             </div>
                     <div class="method-item">
                     <h3 id="method_isCircular">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L116">line 116</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L125">line 125</a></div>
         <code>                    bool
     <strong>isCircular</strong>()
         </code>
@@ -823,7 +822,7 @@ are divided by " ". Separators must be different.</p>                    <p>es. 
             </div>
                     <div class="method-item">
                     <h3 id="method_lenght">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L128">line 128</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L136">line 136</a></div>
         <code>                    int
     <strong>lenght</strong>(string $provider = &#039;haversine&#039;)
         </code>
@@ -863,7 +862,7 @@ are divided by " ". Separators must be different.</p>                    <p>es. 
             </div>
                     <div class="method-item">
                     <h3 id="method_insertPoint">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L152">line 152</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L151">line 151</a></div>
         <code>                    
     <strong>insertPoint</strong>(<a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a> $p)
         </code>
@@ -872,6 +871,8 @@ are divided by " ". Separators must be different.</p>                    <p>es. 
             
     
 
+                    <div class="method-description">
+                                    <p>Insert a Point into the LineString.</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -892,7 +893,7 @@ are divided by " ". Separators must be different.</p>                    <p>es. 
             </div>
                     <div class="method-item">
                     <h3 id="method_split">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L222">line 222</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L220">line 220</a></div>
         <code>                    array
     <strong>split</strong>(<a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a> $split)
         </code>
@@ -972,7 +973,7 @@ given the LineString(Point(1,1), Point(2,2)) split by Point(5,5) we obtain
             </div>
                     <div class="method-item">
                     <h3 id="method_diff">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L253">line 253</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L251">line 251</a></div>
         <code>        static            array
     <strong>diff</strong>(<a href="../../../Karomap/PHPOGC/DataTypes/LineString.html"><abbr title="Karomap\PHPOGC\DataTypes\LineString">LineString</abbr></a> $l1, <a href="../../../Karomap/PHPOGC/DataTypes/LineString.html"><abbr title="Karomap\PHPOGC\DataTypes\LineString">LineString</abbr></a> $l2)
         </code>
@@ -1003,7 +1004,7 @@ given the LineString(Point(1,1), Point(2,2)) split by Point(5,5) we obtain
                     <table class="table table-condensed">
         <tr>
             <td>array</td>
-            <td>Point</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1015,7 +1016,7 @@ given the LineString(Point(1,1), Point(2,2)) split by Point(5,5) we obtain
             </div>
                     <div class="method-item">
                     <h3 id="method_count">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L268">line 268</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/LineString.php#L267">line 267</a></div>
         <code>                    int
     <strong>count</strong>()
         </code>
@@ -1025,7 +1026,7 @@ given the LineString(Point(1,1), Point(2,2)) split by Point(5,5) we obtain
     
 
                     <div class="method-description">
-                                    <p>Countable interface implementation</p>                                                </div>
+                                    <p>Countable interface implementation.</p>                                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>

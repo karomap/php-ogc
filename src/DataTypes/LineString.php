@@ -6,7 +6,7 @@ use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
 /**
- * OGC LineString type
+ * OGC LineString type.
  */
 class LineString extends OGCObject implements \Countable
 {
@@ -20,7 +20,7 @@ class LineString extends OGCObject implements \Countable
     /**
      * Point collection.
      *
-     * @var Point[]
+     * @var \Karomap\PHPOGC\DataTypes\Point[]
      */
     public $points = [];
 
@@ -28,63 +28,72 @@ class LineString extends OGCObject implements \Countable
      * LineString constructor.
      *
      * A LineString must be instantiate with a Points array
-     * es. [new Point(lat, lon), new Point(lat, lon)]
+     * es. [new Point(lon, lat), new Point(lon, lat)]
      *
-     * @param Point[] $points
-     * @param int $srid
+     * @param  \Karomap\PHPOGC\DataTypes\Point[]              $points
+     * @param  int|null                                       $srid
+     * @throws \Karomap\PHPOGC\Exceptions\GeoSpatialException
      * @return void
-     * @throws GeoSpatialException
      */
     public function __construct(array $points, $srid = null)
     {
-        if (sizeof($points) < 2)
+        if (count($points) < 2) {
             throw new GeoSpatialException('A LineString instance must be composed by at least 2 points.');
-
+        }
         $this->points = array_map(function ($p) {
-            if (!$p instanceof Point)
+            if (!$p instanceof Point) {
                 throw new GeoSpatialException('A LineString instance must be constructed directly with Points array only.');
+            }
+
             return $p;
         }, $points);
 
-        if ($srid)
+        if ($srid) {
             $this->srid = $srid;
+        }
     }
 
     /**
      * A Linestring could be constructed with an array of points-array.
      *
-     * es. [[lat, lon], [lat, lon], [lat, lon], ..]
-     * @param Point[] $points
-     * @return LineString
+     * es. [[lon, lat], [lon, lat], [lon, lat], ..]
+     *
+     * @param  array  $points
+     * @return static
      */
     public static function fromArray(array $points)
     {
         $parsed_points = array_map(function ($p) {
-            if (!is_array($p) or sizeof($p) != 2)
+            if (!is_array($p) or count($p) != 2) {
                 throw new GeoSpatialException('Error: array of array containing lat, lon expected.');
+            }
+
             return new Point($p[0], $p[1]);
         }, $points);
+
         return new static($parsed_points);
     }
 
     /**
      * A Linestring could be instantiated using a string where points are divided by a "," and coordinates
      * are divided by " ". Separators must be different.
-     * es. "lat lon, lat lon"
+     * es. "lon lat, lon lat".
      *
-     * @param string $points
-     * @param string $points_separator
-     * @param string $coords_separator
-     * @throws GeoSpatialException
-     * @return LineString
+     * @param  string                                         $points
+     * @param  string                                         $points_separator
+     * @param  string                                         $coords_separator
+     * @throws \Karomap\PHPOGC\Exceptions\GeoSpatialException
+     * @return static
      */
     public static function fromString($points, $points_separator = ',', $coords_separator = ' ')
     {
-        if ($points_separator == $coords_separator)
+        if ($points_separator == $coords_separator) {
             throw new GeoSpatialException('Error: separators must be different');
+        }
         $parsed_points = array_map(function ($p) use ($coords_separator) {
             return Point::fromString($p, $coords_separator);
         }, explode($points_separator, trim($points)));
+
         return new static($parsed_points);
     }
 
@@ -115,14 +124,13 @@ class LineString extends OGCObject implements \Countable
      */
     public function isCircular()
     {
-        return count($this->points) > 3 &&  $this->points[0] == $this->points[count($this->points) - 1];
+        return count($this->points) > 3 && $this->points[0] == $this->points[count($this->points) - 1];
     }
-
 
     /**
      * Return the lenght of the linestring expressed in meters.
      *
-     * @param string $provider (optional) One of "haversine" or "vincenty". Default to "haversine"
+     * @param  string $provider (optional) One of "haversine" or "vincenty". Default to "haversine"
      * @return int
      */
     public function lenght($provider = 'haversine')
@@ -131,23 +139,14 @@ class LineString extends OGCObject implements \Countable
         for ($i = 0; $i < count($this) - 2; $i++) {
             $length += Point::distance($this->points[$i], $this->points[$i + 1], $provider);
         }
+
         return $length;
     }
 
-
-    /*
-     * Insert a Point into the LineString,
+    /**
+     * Insert a Point into the LineString.
      *
-     *
-     * Per ogni step p1-p2 dei punti che compongono la LineString, calcolo d1=d(p,p1) e d2=d(p,p2).
-     * Seleziono lo step come candidato all'inserimento se d1+d2 <= d(p1,p2)*soglia_di_tolleranza.
-     *
-     * TODO: aggiungere condizione più forte oltre a quella con la coppia di punti in osservazione, es. quella con
-     *      coppie di punti adiacenti
-     * TODO: valutare implementazione di ricerca binaria
-     *
-     * @param Point $p
-     *
+     * @param \Karomap\PHPOGC\DataTypes\Point $p
      */
     public function insertPoint(Point $p)
     {
@@ -158,8 +157,8 @@ class LineString extends OGCObject implements \Countable
 
         $threshold = 0.02;
         for ($i = 0; $i < count($this->points) - 2; $i++) {
-            $distance       = Point::distance($this->points[$i], $p) + Point::distance($p, $this->points[$i + 1]);
-            $step_distance  = Point::distance($this->points[$i], $this->points[$i + 1]);
+            $distance = Point::distance($this->points[$i], $p) + Point::distance($p, $this->points[$i + 1]);
+            $step_distance = Point::distance($this->points[$i], $this->points[$i + 1]);
 
             if ($distance > $step_distance - ($step_distance * $threshold) && $distance < ($step_distance + $step_distance * $threshold)) {
                 $newpoints = array_slice($this->points, 0, $i + 1, true);
@@ -170,7 +169,6 @@ class LineString extends OGCObject implements \Countable
             }
         }
     }
-
 
     /**
      * Split the LineString object on the given Point, if present, and returns a tuple (array with two object) composed
@@ -216,7 +214,7 @@ class LineString extends OGCObject implements \Countable
      * 1) LineString(Point(1,1), Point(2,2))
      * 2) null
      *
-     * @param $split
+     * @param  \Karomap\PHPOGC\DataTypes\Point $split
      * @return array
      */
     public function split(Point $split)
@@ -238,30 +236,31 @@ class LineString extends OGCObject implements \Countable
         if ($position === false) {
             return [$this, null];
         } else {
-            array_push($splitted, new LineString(array_slice($this->points, 0, $position + 1)));
-            array_push($splitted, new LineString(array_slice($this->points, $position, count($this->points) - $position)));
+            array_push($splitted, new self(array_slice($this->points, 0, $position + 1)));
+            array_push($splitted, new self(array_slice($this->points, $position, count($this->points) - $position)));
         }
+
         return $splitted;
     }
 
-
     /**
-     * @param LineString $l1
-     * @param LineString $l2
-     * @return array Point
+     * @param  static $l1
+     * @param  static $l2
+     * @return array
      */
-    public static function diff(LineString $l1, LineString $l2)
+    public static function diff(self $l1, self $l2)
     {
         $diffs = array_diff($l1->points, $l2->points);
         foreach ($diffs as $diff) {
             $pos = array_search($diff, $l1->points);
             echo "Il point $diff è presente solo nella prima LineString, in posizione $pos\n";
         }
+
         return $diffs;
     }
 
     /**
-     * Countable interface implementation
+     * Countable interface implementation.
      *
      * @return int
      */

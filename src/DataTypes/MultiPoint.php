@@ -3,7 +3,7 @@
 namespace Karomap\PHPOGC\DataTypes;
 
 /**
- * OGC MultiPoint type
+ * OGC MultiPoint type.
  */
 class MultiPoint extends LineString
 {
@@ -17,8 +17,8 @@ class MultiPoint extends LineString
     /**
      * MultiPoint constructor.
      *
-     * @param array $points
-     * @param int $srid
+     * @param  array    $points
+     * @param  int|null $srid
      * @return void
      */
     public function __construct(array $points, $srid = null)

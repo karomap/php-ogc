@@ -6,7 +6,7 @@ use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
 /**
- * OGC MultiPolygon type
+ * OGC MultiPolygon type.
  */
 class MultiPolygon extends OGCObject implements \Countable
 {
@@ -20,60 +20,63 @@ class MultiPolygon extends OGCObject implements \Countable
     /**
      * Polygon collection.
      *
-     * @var Polygon[]
+     * @var \Karomap\PHPOGC\DataTypes\Polygon[]
      */
     public $polygons = [];
 
     /**
      * MultiPolygon constructor.
-     * @param Polygon[] $polygons
-     * @param int $srid
+     * @param  Karomap\PHPOGC\DataTypes\Polygon[]             $polygons
+     * @param  int|null                                       $srid
+     * @throws \Karomap\PHPOGC\Exceptions\GeoSpatialException
      * @return void
-     * @throws GeoSpatialException
      */
     public function __construct(array $polygons, $srid = null)
     {
-        if (empty($polygons))
+        if (empty($polygons)) {
             throw new GeoSpatialException('A MultiPolygon cannot be empty');
-
+        }
         array_walk($polygons, function ($polygon) {
-            if (!$polygon instanceof Polygon)
+            if (!$polygon instanceof Polygon) {
                 throw new GeoSpatialException('A MultiPolygon must be instantiated with an array of Polygon objects');
+            }
         });
 
         $this->polygons = $polygons;
 
-        if ($srid)
+        if ($srid) {
             $this->srid = $srid;
+        }
     }
 
     /**
-     * @param array $polygons
-     * @return MultiPolygon
+     * @param  array  $polygons
+     * @return static
      */
     public static function fromArray(array $polygons)
     {
         $parsed_polygons = array_map(function ($polygon) {
             return Polygon::fromArray($polygon);
         }, $polygons);
+
         return new static($parsed_polygons);
     }
 
     /**
      * @param $polygons
-     * @param string $polygons_separator
-     * @param string $linestrings_separator
-     * @param string $points_separator
-     * @param string $coords_separator
-     * @return MultiPolygon
-     * @throws GeoSpatialException
+     * @param  string                                         $polygons_separator
+     * @param  string                                         $linestrings_separator
+     * @param  string                                         $points_separator
+     * @param  string                                         $coords_separator
+     * @throws \Karomap\PHPOGC\Exceptions\GeoSpatialException
+     * @return static
      */
     public static function fromString($polygons, $polygons_separator = '|', $linestrings_separator = ';', $points_separator = ',', $coords_separator = ' ')
     {
         $separators = [$polygons_separator, $linestrings_separator, $points_separator, $coords_separator];
-        if (sizeof($separators) != sizeof(array_unique($separators)))
+        if (count($separators) != count(array_unique($separators))) {
             throw new GeoSpatialException('Error: separators must be different');
-
+        }
         $parsed_polygons = array_map(function ($polygon) use ($linestrings_separator, $points_separator, $coords_separator) {
             return Polygon::fromString($polygon, $linestrings_separator, $points_separator, $coords_separator);
         }, explode($polygons_separator, trim($polygons)));
@@ -101,7 +104,7 @@ class MultiPolygon extends OGCObject implements \Countable
     }
 
     /**
-     * Countable interface implementation
+     * Countable interface implementation.
      *
      * @return int
      */

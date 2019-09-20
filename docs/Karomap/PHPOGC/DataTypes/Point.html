@@ -86,7 +86,7 @@
     
 
             <div class="description">
-            <p>OGC Point type</p>                                </div>
+            <p>OGC Point type.</p>                                </div>
     
     
     
@@ -118,19 +118,19 @@
                 <td></td>
             </tr>
                     <tr>
-                <td class="type" id="property_lat">
-                                                                                float
-                </td>
-                <td>$lat</td>
-                <td class="last">Latitude or Y</td>
-                <td></td>
-            </tr>
-                    <tr>
                 <td class="type" id="property_lon">
                                                                                 float
                 </td>
                 <td>$lon</td>
-                <td class="last">Logitude or X</td>
+                <td class="last">Logitude or X.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_lat">
+                                                                                float
+                </td>
+                <td>$lat</td>
+                <td class="last">Latitude or Y.</td>
                 <td></td>
             </tr>
                     <tr>
@@ -139,6 +139,22 @@
                 </td>
                 <td>$address</td>
                 <td class="last">Point address.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_x">
+                                                                                float
+                </td>
+                <td>$x</td>
+                <td class="last">Longitude.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_y">
+                                                                                float
+                </td>
+                <td>$y</td>
+                <td class="last">Latitude.</td>
                 <td></td>
             </tr>
             </table>
@@ -152,10 +168,10 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___get">__get</a>(string $name)
+                    <a href="#method___get">__get</a>(string $key)
         
                                             <p>Get an object property.</p>                </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../Karomap/PHPOGC/OGCObject.html#method___get"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a></small></div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
@@ -243,7 +259,7 @@ Get WKB representation of the instance.</p>                </div>
                     void
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(string|float $lat, string|float $lon, int $srid = null)
+                    <a href="#method___construct">__construct</a>(string|float $lon, string|float $lat, int|null $srid = null)
         
                                             <p>Point constructor.</p>                </div>
                 <div class="col-md-2"></div>
@@ -257,7 +273,7 @@ Get WKB representation of the instance.</p>                </div>
         
                                             <p>A Point could be instantiated from array containing a tuple of string|float lat, lon
      $point = Point::fromArray(["1.123", "2.345"])
-     $point = Point::fromArray([1.123, 2.345])</p>                </div>
+     $point = Point::fromArray([1.123, 2.345]).</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -265,11 +281,11 @@ Get WKB representation of the instance.</p>                </div>
                     static&nbsp;<a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fromString">fromString</a>($points, string $separator = &#039; &#039;)
+                    <a href="#method_fromString">fromString</a>(string $points, string $separator = &#039; &#039;)
         
                                             <p>A Point could be instantiated from a string with a delimiters, by default " " is used
      $point = Point::fromString("1.123 2.345")
-     $point = Point::fromString("1.123: 2.345", ":")</p>                </div>
+     $point = Point::fromString("1.123: 2.345", ":").</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -290,9 +306,9 @@ Get WKB representation of the instance.</p>                </div>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___get">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method___get"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L57">line 57</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L207">line 207</a></div>
         <code>                    mixed
-    <strong>__get</strong>(string $name)
+    <strong>__get</strong>(string $key)
         </code>
     </h3>
     <div class="details">
@@ -307,7 +323,7 @@ Get WKB representation of the instance.</p>                </div>
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$name</td>
+                <td>$key</td>
                 <td></td>
             </tr>
             </table>
@@ -415,7 +431,7 @@ Get WKB representation of the instance.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_fromWKB">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_fromWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L130">line 130</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_fromWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L132">line 132</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/OGCObject.html"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a>
     <strong>fromWKB</strong>($wkb, int|null $srid = null)
         </code>
@@ -460,7 +476,7 @@ Get WKB representation of the instance.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_toWKT">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKT"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L146">line 146</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKT"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L150">line 150</a></div>
         <code>                    string
     <strong>toWKT</strong>()
         </code>
@@ -490,7 +506,7 @@ Get WKB representation of the instance.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_toWKB">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L157">line 157</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toWKB"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L161">line 161</a></div>
         <code>                    
     <strong>toWKB</strong>()
         </code>
@@ -521,7 +537,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toValueArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L111">line 111</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L117">line 117</a></div>
         <code>            protected        array
     <strong>toValueArray</strong>()
         </code>
@@ -551,7 +567,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toArray">
-        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toArray"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L174">line 174</a></div>
+        <div class="location">in <a href="../../../Karomap/PHPOGC/OGCObject.html#method_toArray"><abbr title="Karomap\PHPOGC\OGCObject">OGCObject</abbr></a> at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L178">line 178</a></div>
         <code>                    array
     <strong>toArray</strong>()
         </code>
@@ -581,7 +597,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method___toString">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L116">line 116</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L122">line 122</a></div>
         <code>                    string
     <strong>__toString</strong>()
         </code>
@@ -611,9 +627,9 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L60">line 60</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L63">line 63</a></div>
         <code>                    void
-    <strong>__construct</strong>(string|float $lat, string|float $lon, int $srid = null)
+    <strong>__construct</strong>(string|float $lon, string|float $lat, int|null $srid = null)
         </code>
     </h3>
     <div class="details">
@@ -630,16 +646,16 @@ Get WKB representation of the instance.</p>                                     
                     <table class="table table-condensed">
                     <tr>
                 <td>string|float</td>
-                <td>$lat</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td>string|float</td>
                 <td>$lon</td>
                 <td></td>
             </tr>
                     <tr>
-                <td>int</td>
+                <td>string|float</td>
+                <td>$lat</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
                 <td>$srid</td>
                 <td></td>
             </tr>
@@ -663,7 +679,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_fromArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L78">line 78</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L82">line 82</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a>
     <strong>fromArray</strong>(array $points)
         </code>
@@ -675,7 +691,7 @@ Get WKB representation of the instance.</p>                                     
                     <div class="method-description">
                                     <p>A Point could be instantiated from array containing a tuple of string|float lat, lon
      $point = Point::fromArray(["1.123", "2.345"])
-     $point = Point::fromArray([1.123, 2.345])</p>                                                </div>
+     $point = Point::fromArray([1.123, 2.345]).</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -714,9 +730,9 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_fromString">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L96">line 96</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L101">line 101</a></div>
         <code>        static            <a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a>
-    <strong>fromString</strong>($points, string $separator = &#039; &#039;)
+    <strong>fromString</strong>(string $points, string $separator = &#039; &#039;)
         </code>
     </h3>
     <div class="details">
@@ -726,13 +742,13 @@ Get WKB representation of the instance.</p>                                     
                     <div class="method-description">
                                     <p>A Point could be instantiated from a string with a delimiters, by default " " is used
      $point = Point::fromString("1.123 2.345")
-     $point = Point::fromString("1.123: 2.345", ":")</p>                                                </div>
+     $point = Point::fromString("1.123: 2.345", ":").</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$points</td>
                 <td></td>
             </tr>
@@ -770,7 +786,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_distance">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L139">line 139</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/DataTypes/Point.php#L146">line 146</a></div>
         <code>        static            float
     <strong>distance</strong>(<a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a> $p1, <a href="../../../Karomap/PHPOGC/DataTypes/Point.html"><abbr title="Karomap\PHPOGC\DataTypes\Point">Point</abbr></a> $p2, string $provider = &#039;haversine&#039;)
         </code>

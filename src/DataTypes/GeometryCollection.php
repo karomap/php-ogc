@@ -6,7 +6,7 @@ use Karomap\PHPOGC\Exceptions\GeoSpatialException;
 use Karomap\PHPOGC\OGCObject;
 
 /**
- * OGC GeometryCollection type
+ * OGC GeometryCollection type.
  *
  * TODO: implements fromString and fromArray methods
  */
@@ -22,28 +22,30 @@ class GeometryCollection extends OGCObject implements \Countable
     /**
      * OGCObject collection.
      *
-     * @var OGCObject[]
+     * @var \Karomap\PHPOGC\OGCObject[]
      */
     public $geometries = [];
 
     /**
      * GeometryCollection constructor.
      *
-     * @param OGCObject[] $ogcobjects
-     * @param int $srid
+     * @param  \Karomap\PHPOGC\OGCObject[]                    $ogcobjects
+     * @param  int|null                                       $srid
+     * @throws \Karomap\PHPOGC\Exceptions\GeoSpatialException
      * @return void
-     * @throws GeospatialException
      */
     public function __construct(array $ogcobjects, $srid = null)
     {
         array_walk($ogcobjects, function ($ogcobject) {
-            if (!$ogcobject instanceof OGCObject)
+            if (!$ogcobject instanceof OGCObject) {
                 throw new GeoSpatialException('A GeometryCollection must be constructed with an array of OGCObject objects');
+            }
         });
         $this->geometries = $ogcobjects;
 
-        if ($srid)
+        if ($srid) {
             $this->srid = $srid;
+        }
     }
 
     /*
@@ -56,7 +58,7 @@ class GeometryCollection extends OGCObject implements \Countable
         return array_map(function ($ogcobject) {
             return [
                 'type' => $ogcobject->type,
-                'value' => $ogcobject->toArray()
+                'value' => $ogcobject->toArray(),
             ];
         }, $this->geometries);
     }
@@ -69,12 +71,12 @@ class GeometryCollection extends OGCObject implements \Countable
     }
 
     /**
-     * Countable interface implementation
+     * Countable interface implementation.
      *
      * @return int
      */
     public function count()
     {
-        return sizeof($this->geometries);
+        return count($this->geometries);
     }
 }

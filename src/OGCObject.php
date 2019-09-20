@@ -6,7 +6,7 @@ use CrEOF\Geo\WKB\Parser as WKBParser;
 use CrEOF\Geo\WKT\Parser as WKTParser;
 
 /**
- * Abstract class represent Open Geospatial Consortium (OGC) geometry type
+ * Abstract class represent Open Geospatial Consortium (OGC) geometry type.
  */
 abstract class OGCObject
 {
@@ -21,14 +21,14 @@ abstract class OGCObject
     ];
 
     /**
-     * WKT
+     * WKT.
      *
      * @var string|null
      */
     private $wkt = null;
 
     /**
-     * WKB
+     * WKB.
      *
      * @var string|null
      */
@@ -51,34 +51,34 @@ abstract class OGCObject
     /**
      * Get an object property.
      *
-     * @param string $name
+     * @param  string $key
      * @return mixed
      */
-    public function __get($name)
+    public function __get($key)
     {
-        if (strtolower($name) == 'wkt') {
-            return ($this->wkt == null ? $this->wkt = $this->toWKT() : $this->wkt);
-        } elseif (strtolower($name) == 'wkb') {
-            return ($this->wkb == null ? $this->wkb = $this->toWKB() : $this->wkb);
+        if (strtolower($key) == 'wkt') {
+            return $this->wkt == null ? $this->wkt = $this->toWKT() : $this->wkt;
+        } elseif (strtolower($key) == 'wkb') {
+            return $this->wkb == null ? $this->wkb = $this->toWKB() : $this->wkb;
         }
     }
 
     /**
      * Get PHP class name for the given OGC type.
      *
-     * @param string $type
+     * @param  string $type
      * @return string
      */
     private static function buildClassName($type)
     {
-        return 'Karomap\PHPOGC\DataTypes\\' . self::$types_map[$type];
+        return 'Karomap\PHPOGC\DataTypes\\'.self::$types_map[$type];
     }
 
     /**
      * Create an OGCObject instance from parsed WKB/WKT.
      *
-     * @param array $parsed
-     * @return OGCObject
+     * @param  array  $parsed
+     * @return static
      */
     public static function buildOGCObject($parsed)
     {
@@ -105,37 +105,41 @@ abstract class OGCObject
     /**
      * Create an OGCObject instance from WKT.
      *
-     * @param string $wkt
-     * @param int|null $srid
-     * @return OGCObject
+     * @param  string   $wkt
+     * @param  int|null $srid
+     * @return static
      */
     public static function fromWKT($wkt, $srid = null)
     {
         $parser = new WKTParser();
-        $geo = self::buildOGCObject($parser->parse($wkt));
-        $geo->wkt = $wkt;
+        $ogc = self::buildOGCObject($parser->parse($wkt));
+        $ogc->wkt = $wkt;
+
         if ($srid) {
-            $geo->srid = $srid;
+            $ogc->srid = $srid;
         }
-        return $geo;
+
+        return $ogc;
     }
 
     /**
      * Create an OGCObject instance from WKB.
      *
      * @param $wkb
-     * @param int|null $srid
-     * @return OGCObject
+     * @param  int|null $srid
+     * @return static
      */
     public static function fromWKB($wkb, $srid = null)
     {
         $parser = new WKBParser();
-        $geo = self::buildOGCObject($parser->parse($wkb));
-        $geo->wkb = $wkb;
+        $ogc = self::buildOGCObject($parser->parse($wkb));
+        $ogc->wkb = $wkb;
+
         if ($srid) {
-            $geo->srid = $srid;
+            $ogc->srid = $srid;
         }
-        return $geo;
+
+        return $ogc;
     }
 
     /**
@@ -175,7 +179,7 @@ abstract class OGCObject
     {
         return [
             'type' => $this->type,
-            'value' => $this->toValueArray()
+            'value' => $this->toValueArray(),
         ];
     }
 
