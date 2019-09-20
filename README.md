@@ -1,4 +1,6 @@
-[![Latest Stable Version](https://poser.pugx.org/karomap/php-ogc/v/stable)](https://packagist.org/packages/karomap/php-ogc) [![Latest Unstable Version](https://poser.pugx.org/karomap/php-ogc/v/unstable)](https://packagist.org/packages/karomap/php-ogc)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/karomap/php-ogc?style=flat-square)](https://packagist.org/packages/karomap/php-ogc)
+[![Total Downloads](https://img.shields.io/packagist/dt/karomap/php-ogc?style=flat-square)](https://packagist.org/packages/karomap/php-ogc)
+[![CircleCI](https://img.shields.io/circleci/build/gh/karomap/php-ogc/master?style=flat-square)](https://circleci.com/gh/karomap/php-ogc/tree/master)
 
 # Rationale
 
