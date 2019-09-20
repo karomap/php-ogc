@@ -192,4 +192,14 @@ abstract class OGCObject
     {
         return $this->wkt ?? $this->toWKT();
     }
+
+    /**
+     * Get OGC type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 }

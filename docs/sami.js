@@ -82,6 +82,7 @@ window.projectVersion = 'master';
                     {"type": "Method", "fromName": "Karomap\\PHPOGC\\OGCObject", "fromLink": "Karomap/PHPOGC/OGCObject.html", "link": "Karomap/PHPOGC/OGCObject.html#method_toValueArray", "name": "Karomap\\PHPOGC\\OGCObject::toValueArray", "doc": "&quot;Array representation of instance coordinates.&quot;"},
                     {"type": "Method", "fromName": "Karomap\\PHPOGC\\OGCObject", "fromLink": "Karomap/PHPOGC/OGCObject.html", "link": "Karomap/PHPOGC/OGCObject.html#method_toArray", "name": "Karomap\\PHPOGC\\OGCObject::toArray", "doc": "&quot;Array representation of the instance.&quot;"},
                     {"type": "Method", "fromName": "Karomap\\PHPOGC\\OGCObject", "fromLink": "Karomap/PHPOGC/OGCObject.html", "link": "Karomap/PHPOGC/OGCObject.html#method___toString", "name": "Karomap\\PHPOGC\\OGCObject::__toString", "doc": "&quot;String representation of the instance.&quot;"},
+                    {"type": "Method", "fromName": "Karomap\\PHPOGC\\OGCObject", "fromLink": "Karomap/PHPOGC/OGCObject.html", "link": "Karomap/PHPOGC/OGCObject.html#method_getType", "name": "Karomap\\PHPOGC\\OGCObject::getType", "doc": "&quot;Get OGC type.&quot;"},
             
             
                                         // Fix trailing commas in the index
