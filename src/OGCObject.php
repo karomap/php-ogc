@@ -143,6 +143,19 @@ abstract class OGCObject
     }
 
     /**
+     * Get GeoJSON geom type.
+     *
+     * @param  string $type
+     * @return string
+     */
+    public static function getGeoJsonType(string $type)
+    {
+        $key = strtoupper($type);
+
+        return (array_key_exists($key, self::$types_map)) ? self::$types_map[$key] : $type;
+    }
+
+    /**
      * Get WKT representation of the instance.
      *
      * @return string
@@ -201,18 +214,5 @@ abstract class OGCObject
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Get GeoJSON geom type.
-     *
-     * @param  string $type
-     * @return string
-     */
-    public function getGeoJsonType(string $type)
-    {
-        $key = strtoupper($type);
-
-        return (array_key_exists($key, self::$types_map)) ? self::$types_map[$key] : $type;
     }
 }

@@ -157,6 +157,16 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getGeoJsonType">getGeoJsonType</a>(string $type)
+        
+                                            <p>Get GeoJSON geom type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
                 </div>
                 <div class="col-md-8 type">
@@ -214,16 +224,6 @@ Get WKB representation of the instance.</p>                </div>
                     <a href="#method_getType">getType</a>()
         
                                             <p>Get OGC type.</p>                </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    string
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getGeoJsonType">getGeoJsonType</a>(string $type)
-        
-                                            <p>Get GeoJSON geom type.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -403,8 +403,48 @@ Get WKB representation of the instance.</p>                </div>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_getGeoJsonType">
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L151">line 151</a></div>
+        <code>        static            string
+    <strong>getGeoJsonType</strong>(string $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get GeoJSON geom type.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_toWKT">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L150">line 150</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L163">line 163</a></div>
         <code>                    string
     <strong>toWKT</strong>()
         </code>
@@ -434,7 +474,7 @@ Get WKB representation of the instance.</p>                </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_toWKB">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L161">line 161</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L174">line 174</a></div>
         <code>                    
     <strong>toWKB</strong>()
         </code>
@@ -465,7 +505,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toValueArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L171">line 171</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L184">line 184</a></div>
         <code>    abstract        protected        array
     <strong>toValueArray</strong>()
         </code>
@@ -495,7 +535,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_toArray">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L178">line 178</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L191">line 191</a></div>
         <code>                    array
     <strong>toArray</strong>()
         </code>
@@ -525,7 +565,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method___toString">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L191">line 191</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L204">line 204</a></div>
         <code>                    string
     <strong>__toString</strong>()
         </code>
@@ -555,7 +595,7 @@ Get WKB representation of the instance.</p>                                     
             </div>
                     <div class="method-item">
                     <h3 id="method_getType">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L201">line 201</a></div>
+        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L214">line 214</a></div>
         <code>                    string
     <strong>getType</strong>()
         </code>
@@ -567,46 +607,6 @@ Get WKB representation of the instance.</p>                                     
                     <div class="method-description">
                                     <p>Get OGC type.</p>                                                </div>
                 <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getGeoJsonType">
-        <div class="location">at         <a href="https://github.com/karomap/php-ogc/blob/master/src/OGCObject.php#L212">line 212</a></div>
-        <code>                    string
-    <strong>getGeoJsonType</strong>(string $type)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                    <div class="method-description">
-                                    <p>Get GeoJSON geom type.</p>                                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$type</td>
-                <td></td>
-            </tr>
-            </table>
-
             
                             <h4>Return Value</h4>
 
