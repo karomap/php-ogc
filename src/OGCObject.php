@@ -202,4 +202,17 @@ abstract class OGCObject
     {
         return $this->type;
     }
+
+    /**
+     * Get GeoJSON geom type.
+     *
+     * @param  string $type
+     * @return string
+     */
+    public function getGeoJsonType(string $type)
+    {
+        $key = strtoupper($type);
+
+        return (array_key_exists($key, self::$types_map)) ? self::$types_map[$key] : $type;
+    }
 }
